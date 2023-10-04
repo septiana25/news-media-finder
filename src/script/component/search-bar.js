@@ -1,3 +1,4 @@
+import './news-categories.js';
 class SearchBar extends HTMLElement {
     constructor() {
         super();
@@ -11,11 +12,12 @@ class SearchBar extends HTMLElement {
     set clickEvent(event) {
         this._clickEvent = event;
         this.render();
+        //this.renderCategories();
     }
 
     set categories(categories) {
         this._categories = categories;
-        this.render();
+        this.renderCategories();
     }
 
     get value1() {
@@ -88,13 +90,16 @@ class SearchBar extends HTMLElement {
                 border: 0;
                 text-transform: uppercase;
             }
-            .wrapper > #buttons {
+
+             #buttons {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-flow: row wrap;
                 gap: .4rem;
             }
-            .wrapper #buttons > button {
+
+            #buttons > button {
                 border: 1px solid #6759ff;
                 border-radius: 15px;
                 background-color: trasparent;
@@ -103,11 +108,11 @@ class SearchBar extends HTMLElement {
                 cursor: pointer;
             }
 
-            #buttons > button.active {
+            #buttons button.active {
                 background-color: #6759ff;
                 color: white;
             }
-            
+
             @media screen and (max-width: 550px) {
                 .search-container {
                 flex-direction: column;
@@ -139,20 +144,26 @@ class SearchBar extends HTMLElement {
                 <button class="button-value">terbaru</button>
                 <button class="button-value">terbaru</button>
                 <button class="button-value">terbaru</button>
-            </div> */
-        
-        const searchElement = this.shadowDOM.querySelector('.wrapper');
-        const categoriesElemnt = document.createElement('div');
-
-        categoriesElemnt.setAttribute('id', 'buttons');
-        searchElement.appendChild(categoriesElemnt);
-        //const rs = this._categories.map(media => media);
-        //console.log(rs);
-
-        
+            </div> */       
         
         
         this.shadowDOM.querySelector('#searchButtonElement').addEventListener('click', this._clickEvent);
+    }
+
+    renderCategories() {
+        this.shadowDOM.innerHTML = '';
+        this.render();
+        const searchElement = this.shadowDOM.querySelector('.wrapper');
+        const categoriesElemnt = document.createElement('div');
+        categoriesElemnt.setAttribute('id', 'buttons');
+        searchElement.appendChild(categoriesElemnt);
+        this._categories.forEach(category => {
+            const buttonElement = document.createElement('button');
+            buttonElement.classList.add('button-value');
+            buttonElement.textContent = 'terbaru';
+            buttonElement.addEventListener('click', this._clickEvent);
+            categoriesElemnt.appendChild(buttonElement);
+        })
     }
 }
 

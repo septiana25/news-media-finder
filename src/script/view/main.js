@@ -11,10 +11,10 @@ const main = _ => {
   const onButtonSearchClicked =  async _ => {
 
     try {
-      const result = await DataSource.searchClub(searchElement.value1);
+      //const result = await DataSource.searchClub(searchElement.value1);
       const categories = await DataSource.searchMedia();
       renderCategories(categories);
-      renderResult(result);
+      //renderResult(result);
     } catch (error) {
       fallbackResult(error);
     }
