@@ -28,8 +28,8 @@ class SearchBar extends HTMLElement {
        return this.shadowDOM.querySelector('#searchElement').value;
     }
 
-    get firstCategory(){
-        return this.shadowDOM.querySelector('#data-1').value;
+    get addEvent(){
+        //return this.sendcategoriesElemnt();
     }
 
     render() {
@@ -133,12 +133,15 @@ class SearchBar extends HTMLElement {
             <div id="search-container" class="search-container">
                 <input placeholder="Search media news" id="searchElement" type="search">
                 <button id="searchButtonElement" type="submit">Search</button>
+                <button id="test" type="submit">tes</button>
             </div>
 
         </div>
         `;
            
         this.shadowDOM.querySelector('#searchButtonElement').addEventListener('click', this._clickEvent);
+
+        
     }
 
     renderCategories() {
@@ -150,11 +153,14 @@ class SearchBar extends HTMLElement {
         categoriesElemnt.setAttribute('id', 'buttons');
         searchElement.appendChild(categoriesElemnt);
         
-        this._categories.forEach(item => {
+        this._categories.forEach(item => categoriesElemnt.category = item.paths );
 
-            categoriesElemnt.category = item.paths;
-             
-        });
+        //console.log(categoriesElemnt.arrNoFuc);
+        categoriesElemnt.clickEvent = this.sendcategoriesElemnt;
+    }
+
+    sendcategoriesElemnt() {
+        return `this.shadowDOM.querySelector('#button-2').classList.add('active')`;
     }
 }
 

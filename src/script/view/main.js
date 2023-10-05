@@ -7,6 +7,7 @@ const main = _ => {
   const navWrapper = document.querySelector('.nav-wrapper');
   const searchElement = document.querySelector('search-bar');
   const clubListElement = document.querySelector('news-list');
+  
 
   const onButtonSearchClicked =  async _ => {
     try {
@@ -19,6 +20,8 @@ const main = _ => {
     }
 
   };
+
+  
 
   const renderCategories = (newsResult, value) => {
     const medFilter = mediaFilter(newsResult, value);
@@ -74,7 +77,10 @@ const main = _ => {
   }
 
   searchElement.clickEvent = onButtonSearchClicked;
+  
   renderNavigation();
+
+
 };
 
 export default main;

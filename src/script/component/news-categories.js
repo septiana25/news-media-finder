@@ -9,7 +9,15 @@ class NewsCategories extends HTMLElement {
         this.render();
     }
 
-    
+    set clickEvent(event) {
+        this._clickEvent = event;
+        this.render();
+        //this.renderCategories();
+    }
+
+    get arrNoFuc(){
+        return this.arrNoFunction();
+    }
 
     render(){
         this.shadowDOM.innerHTML = `
@@ -31,14 +39,25 @@ class NewsCategories extends HTMLElement {
             </style>
         `;
         let no = 1;
+        const arrNo = [];
         this._category.forEach(cat => {
-             let active = no === 1 ? 'active' : ''; 
+             let active = no === 1 ? ' class="active"' : ''; 
             this.shadowDOM.innerHTML += `
-            <input type="button" class="${active}" id="data-${no}" value="${ cat.name }"></input>
-        `;
-
+                <input type="button" ${active} id="button-${no}" value="${ cat.name }"></input>
+            `;
+            arrNo.push(no);
             no++;
-        })        
+        });
+
+        for (const no of arrNo) {
+
+            this.shadowDOM.querySelector(`#button-${no}`).addEventListener('click', this._clickEvent);
+        }
+    }
+
+    arrNoFunction() {
+        
+        return this._category.length;
     }
 }
 
