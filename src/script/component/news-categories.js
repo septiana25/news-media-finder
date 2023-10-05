@@ -9,18 +9,36 @@ class NewsCategories extends HTMLElement {
         this.render();
     }
 
+    
+
     render(){
         this.shadowDOM.innerHTML = `
-            style>
-                
+            <style>
+            :host > input{
+                border: 1px solid #6759ff;
+                border-radius: 15px;
+                background-color: trasparent;
+                color: #6759ff;
+                padding: 5px 10px;
+                cursor: pointer;
+                text-transform: capitalize;
+            }
 
+            :host > input.active {
+                background-color: #6759ff;
+                color: white;
+            }
             </style>
-
-            <button class="button-value active">terbaru</button>
-            <button class="button-value">terbaru</button>
-            <button class="button-value">terbaru</button>
-            <button class="button-value">terbaru</button>
         `;
+        let no = 1;
+        this._category.forEach(cat => {
+             let active = no === 1 ? 'active' : ''; 
+            this.shadowDOM.innerHTML += `
+            <input type="button" class="${active}" id="data-${no}" value="${ cat.name }"></input>
+        `;
+
+            no++;
+        })        
     }
 }
 

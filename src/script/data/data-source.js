@@ -1,12 +1,12 @@
 
 class DataSource {
-  static async searchClub(keyword) {
+  static async searchNews(path, media) {
     /* 
       const filteredClubs = clubs.filter(club => club.name.toUpperCase().includes(keyword.toUpperCase()) || club.description.toUpperCase().includes(keyword.toUpperCase()));
 */
 
     try {
-      const response =  await fetch(`https://api-berita-indonesia.vercel.app/${keyword.toLowerCase()}/terbaru/`);
+      const response =  await fetch(`https://api-berita-indonesia.vercel.app/${media.toLowerCase()}/${path.toLowerCase()}/`);
       const responseJson = await response.json();
       if (responseJson.success) {
         //console.log(responseJson.data);

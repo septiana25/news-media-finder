@@ -19,19 +19,18 @@ class SearchBar extends HTMLElement {
         this._categories = categories;
         this.renderCategories();
     }
-
-    get value1() {
-        return this.shadowDOM.querySelector('#searchElement').value;
+    set searchValue(searchValue){
+        this._searchValue = searchValue;
+        this.renderCategories();
     }
 
-/*     renderCategories() {
-        this.shadowDOM.innerHTML = '';
-        const searchElement = document.querySelector('.wrapper');
-        const categoriesElemnt = document.createElement('div');
-        console.log(searchElement);
-        //categoriesElemnt.setAttribute('id', 'buttons');
-        //searchElement.appendChild(categoriesElemnt);
-    } */
+    get value1() {
+       return this.shadowDOM.querySelector('#searchElement').value;
+    }
+
+    get firstCategory(){
+        return this.shadowDOM.querySelector('#data-1').value;
+    }
 
     render() {
         this.shadowDOM.innerHTML = `
@@ -138,32 +137,24 @@ class SearchBar extends HTMLElement {
 
         </div>
         `;
-
-        /*             <div id="buttons">
-                <button class="button-value active">terbaru</button>
-                <button class="button-value">terbaru</button>
-                <button class="button-value">terbaru</button>
-                <button class="button-value">terbaru</button>
-            </div> */       
-        
-        
+           
         this.shadowDOM.querySelector('#searchButtonElement').addEventListener('click', this._clickEvent);
     }
 
     renderCategories() {
-        this.shadowDOM.innerHTML = '';
         this.render();
+
         const searchElement = this.shadowDOM.querySelector('.wrapper');
-        const categoriesElemnt = document.createElement('div');
+        const categoriesElemnt = document.createElement('news-categories');
+
         categoriesElemnt.setAttribute('id', 'buttons');
         searchElement.appendChild(categoriesElemnt);
-        this._categories.forEach(category => {
-            const buttonElement = document.createElement('button');
-            buttonElement.classList.add('button-value');
-            buttonElement.textContent = 'terbaru';
-            buttonElement.addEventListener('click', this._clickEvent);
-            categoriesElemnt.appendChild(buttonElement);
-        })
+        
+        this._categories.forEach(item => {
+
+            categoriesElemnt.category = item.paths;
+             
+        });
     }
 }
 
